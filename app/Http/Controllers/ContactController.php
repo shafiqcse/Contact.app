@@ -12,6 +12,7 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
+        $contacts = Contact::all(); // new
         $query = Contact::query();
 
         if ($request->has('search')) {
@@ -23,8 +24,6 @@ class ContactController extends Controller
         $order = $request->get('order', 'asc'); // default order is ascending
 
         $contacts = Contact::orderBy($sort_by, $order)->paginate(10);
-
-        /*        return view('contacts.index', compact('contacts', 'sort_by', 'order'));*/
 
 
         if ($request->has('sort_by')) {
